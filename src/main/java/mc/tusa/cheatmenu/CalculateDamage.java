@@ -9,7 +9,6 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-// LOL FUN CLASS FOR CALCULATING DAMAGE FROM WEAPON
 public class CalculateDamage {
     public static void CalculateItemAttackDamage(Player player, Player victim, ItemStack item) {
         double attackDamage = getDamage(item);
@@ -88,8 +87,6 @@ public class CalculateDamage {
         } else if (item.getType().equals(Material.WOODEN_SWORD)) {
             attackDamage = 4;
         }
-
-        //AXE
         else if (item.getType().equals(Material.NETHERITE_AXE)) {
             attackDamage = 10;
         } else if (item.getType().equals(Material.DIAMOND_AXE)) {
@@ -102,10 +99,7 @@ public class CalculateDamage {
             attackDamage = 7;
         } else if (item.getType().equals(Material.WOODEN_AXE)) {
             attackDamage = 7;
-        }
-
-        //PICKAXE
-        else if (item.getType().equals(Material.NETHERITE_PICKAXE)) {
+        } else if (item.getType().equals(Material.NETHERITE_PICKAXE)) {
             attackDamage = 6;
         } else if (item.getType().equals(Material.DIAMOND_PICKAXE)) {
             attackDamage = 5;
@@ -130,8 +124,7 @@ public class CalculateDamage {
             attackDamage = 2.5;
         } else if (item.getType().equals(Material.WOODEN_SHOVEL)) {
             attackDamage = 2.5;
-        }
-        else if (item.getType().equals(Material.TRIDENT)) {
+        } else if (item.getType().equals(Material.TRIDENT)) {
             attackDamage = 9;
         }
         else {
