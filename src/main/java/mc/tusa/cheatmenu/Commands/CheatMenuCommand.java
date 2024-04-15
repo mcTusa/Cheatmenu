@@ -10,11 +10,13 @@ import mc.tusa.cheatmenu.Listeners.CheatGUI;
 import mc.tusa.cheatmenu.TeleportUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import java.util.List;
 
@@ -116,11 +118,76 @@ public class CheatMenuCommand implements CommandExecutor {
                         byte yRot = (byte) ((getYaw(player, centerLocation) / 360.0) * 256);
                         packet2.getBytes().write(0, yRot);
                         manager.sendServerPacket(nearPlayer, packet2);
-                        CalculateDamage.CalculateItemAttackDamage(player, nearPlayer, player.getInventory().getItemInMainHand());
+                        if (ticks >= getDelay(player.getInventory().getItemInMainHand())) {
+                            CalculateDamage.CalculateItemAttackDamage(player, nearPlayer, player.getInventory().getItemInMainHand());
+                            ticks = 0;
+                        }
                     }
                 }
             }
         }.runTaskTimer(cheatmenu, 0, 1);
+    }
+
+    public int getDelay(ItemStack itemStack)
+    {
+        double attackSpeed;
+        if (itemStack.getType().equals(Material.NETHERITE_SWORD)) {
+            attackSpeed = 1.6;
+        } else if (itemStack.getType().equals(Material.DIAMOND_SWORD)) {
+            attackSpeed = 1.6;
+        } else if (itemStack.getType().equals(Material.IRON_SWORD)) {
+            attackSpeed = 1.6;
+        } else if (itemStack.getType().equals(Material.STONE_SWORD)) {
+            attackSpeed = 1.6;
+        } else if (itemStack.getType().equals(Material.GOLDEN_SWORD)) {
+            attackSpeed = 1.6;
+        } else if (itemStack.getType().equals(Material.WOODEN_SWORD)) {
+            attackSpeed = 1.6;
+        }
+        else if (itemStack.getType().equals(Material.NETHERITE_AXE)) {
+            attackSpeed = 1;
+        } else if (itemStack.getType().equals(Material.DIAMOND_AXE)) {
+            attackSpeed = 1;
+        } else if (itemStack.getType().equals(Material.IRON_AXE)) {
+            attackSpeed = 0.9;
+        } else if (itemStack.getType().equals(Material.STONE_AXE)) {
+            attackSpeed = 0.8;
+        } else if (itemStack.getType().equals(Material.GOLDEN_AXE)) {
+            attackSpeed = 1;
+        } else if (itemStack.getType().equals(Material.WOODEN_AXE)) {
+            attackSpeed = 0.8;
+        } else if (itemStack.getType().equals(Material.NETHERITE_PICKAXE)) {
+            attackSpeed = 1.2;
+        } else if (itemStack.getType().equals(Material.DIAMOND_PICKAXE)) {
+            attackSpeed = 1.2;
+        } else if (itemStack.getType().equals(Material.IRON_PICKAXE)) {
+            attackSpeed = 1.2;
+        } else if (itemStack.getType().equals(Material.STONE_PICKAXE)) {
+            attackSpeed = 1.2;
+        } else if (itemStack.getType().equals(Material.GOLDEN_PICKAXE)) {
+            attackSpeed = 1.2;
+        } else if (itemStack.getType().equals(Material.WOODEN_PICKAXE)) {
+            attackSpeed = 1.2;
+        } else if (itemStack.getType().equals(Material.NETHERITE_SHOVEL)) {
+            attackSpeed = 1;
+        } else if (itemStack.getType().equals(Material.DIAMOND_SHOVEL)) {
+            attackSpeed = 1;
+        } else if (itemStack.getType().equals(Material.IRON_SHOVEL)) {
+            attackSpeed = 1;
+        } else if (itemStack.getType().equals(Material.STONE_SHOVEL)) {
+            attackSpeed = 1;
+        } else if (itemStack.getType().equals(Material.GOLDEN_SHOVEL)) {
+            attackSpeed = 1;
+        } else if (itemStack.getType().equals(Material.WOODEN_SHOVEL)) {
+            attackSpeed = 1;
+        } else if (itemStack.getType().equals(Material.TRIDENT)) {
+            attackSpeed = 1.1;
+        }
+        else {
+            attackSpeed = 4;
+        }
+
+        return (int) Math.round((1 / attackSpeed) * 20);
     }
 
     public float getYaw(Player p, Location point) {
