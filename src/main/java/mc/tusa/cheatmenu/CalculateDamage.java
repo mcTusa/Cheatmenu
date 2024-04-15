@@ -12,78 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 // LOL FUN CLASS FOR CALCULATING DAMAGE FROM WEAPON
 public class CalculateDamage {
     public static void CalculateItemAttackDamage(Player player, Player victim, ItemStack item) {
-        double attackDamage;
-
-        //SWORD
-        if (item.getType().equals(Material.NETHERITE_SWORD)) {
-            attackDamage = 8;
-        } else if (item.getType().equals(Material.DIAMOND_SWORD)) {
-            attackDamage = 7;
-        } else if (item.getType().equals(Material.IRON_SWORD)) {
-            attackDamage = 6;
-        } else if (item.getType().equals(Material.STONE_SWORD)) {
-            attackDamage = 5;
-        } else if (item.getType().equals(Material.GOLDEN_SWORD)) {
-            attackDamage = 4;
-        } else if (item.getType().equals(Material.WOODEN_SWORD)) {
-            attackDamage = 4;
-        }
-
-        //AXE
-        else if (item.getType().equals(Material.NETHERITE_AXE)) {
-            attackDamage = 10;
-        } else if (item.getType().equals(Material.DIAMOND_AXE)) {
-            attackDamage = 9;
-        } else if (item.getType().equals(Material.IRON_AXE)) {
-            attackDamage = 9;
-        } else if (item.getType().equals(Material.STONE_AXE)) {
-            attackDamage = 9;
-        } else if (item.getType().equals(Material.GOLDEN_AXE)) {
-            attackDamage = 7;
-        } else if (item.getType().equals(Material.WOODEN_AXE)) {
-            attackDamage = 7;
-        }
-
-        //PICKAXE
-        else if (item.getType().equals(Material.NETHERITE_PICKAXE)) {
-            attackDamage = 6;
-        } else if (item.getType().equals(Material.DIAMOND_PICKAXE)) {
-            attackDamage = 5;
-        } else if (item.getType().equals(Material.IRON_PICKAXE)) {
-            attackDamage = 4;
-        } else if (item.getType().equals(Material.STONE_PICKAXE)) {
-            attackDamage = 3;
-        } else if (item.getType().equals(Material.GOLDEN_PICKAXE)) {
-            attackDamage = 2;
-        } else if (item.getType().equals(Material.WOODEN_PICKAXE)) {
-            attackDamage = 2;
-        }
-
-        //SHOVEL
-        else if (item.getType().equals(Material.NETHERITE_SHOVEL)) {
-            attackDamage = 6.5;
-        } else if (item.getType().equals(Material.DIAMOND_SHOVEL)) {
-            attackDamage = 5.5;
-        } else if (item.getType().equals(Material.IRON_SHOVEL)) {
-            attackDamage = 4.5;
-        } else if (item.getType().equals(Material.STONE_SHOVEL)) {
-            attackDamage = 3.5;
-        } else if (item.getType().equals(Material.GOLDEN_SHOVEL)) {
-            attackDamage = 2.5;
-        } else if (item.getType().equals(Material.WOODEN_SHOVEL)) {
-            attackDamage = 2.5;
-        }
-
-        //TRIDENT
-        else if (item.getType().equals(Material.TRIDENT)) {
-            attackDamage = 9;
-        }
-
-        //ITEM IS NOT A TOOL
-        else {
-            attackDamage = 1;
-        }
-
+        double attackDamage = getDamage(item);
         int sharpnessLVL;
         try
         {
@@ -143,4 +72,72 @@ public class CalculateDamage {
                 (boot != null ? boot.getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) : 0);
     }
 
+    public static double getDamage(ItemStack item)
+    {
+        double attackDamage;
+        if (item.getType().equals(Material.NETHERITE_SWORD)) {
+            attackDamage = 8;
+        } else if (item.getType().equals(Material.DIAMOND_SWORD)) {
+            attackDamage = 7;
+        } else if (item.getType().equals(Material.IRON_SWORD)) {
+            attackDamage = 6;
+        } else if (item.getType().equals(Material.STONE_SWORD)) {
+            attackDamage = 5;
+        } else if (item.getType().equals(Material.GOLDEN_SWORD)) {
+            attackDamage = 4;
+        } else if (item.getType().equals(Material.WOODEN_SWORD)) {
+            attackDamage = 4;
+        }
+
+        //AXE
+        else if (item.getType().equals(Material.NETHERITE_AXE)) {
+            attackDamage = 10;
+        } else if (item.getType().equals(Material.DIAMOND_AXE)) {
+            attackDamage = 9;
+        } else if (item.getType().equals(Material.IRON_AXE)) {
+            attackDamage = 9;
+        } else if (item.getType().equals(Material.STONE_AXE)) {
+            attackDamage = 9;
+        } else if (item.getType().equals(Material.GOLDEN_AXE)) {
+            attackDamage = 7;
+        } else if (item.getType().equals(Material.WOODEN_AXE)) {
+            attackDamage = 7;
+        }
+
+        //PICKAXE
+        else if (item.getType().equals(Material.NETHERITE_PICKAXE)) {
+            attackDamage = 6;
+        } else if (item.getType().equals(Material.DIAMOND_PICKAXE)) {
+            attackDamage = 5;
+        } else if (item.getType().equals(Material.IRON_PICKAXE)) {
+            attackDamage = 4;
+        } else if (item.getType().equals(Material.STONE_PICKAXE)) {
+            attackDamage = 3;
+        } else if (item.getType().equals(Material.GOLDEN_PICKAXE)) {
+            attackDamage = 2;
+        } else if (item.getType().equals(Material.WOODEN_PICKAXE)) {
+            attackDamage = 2;
+        }
+        else if (item.getType().equals(Material.NETHERITE_SHOVEL)) {
+            attackDamage = 6.5;
+        } else if (item.getType().equals(Material.DIAMOND_SHOVEL)) {
+            attackDamage = 5.5;
+        } else if (item.getType().equals(Material.IRON_SHOVEL)) {
+            attackDamage = 4.5;
+        } else if (item.getType().equals(Material.STONE_SHOVEL)) {
+            attackDamage = 3.5;
+        } else if (item.getType().equals(Material.GOLDEN_SHOVEL)) {
+            attackDamage = 2.5;
+        } else if (item.getType().equals(Material.WOODEN_SHOVEL)) {
+            attackDamage = 2.5;
+        }
+        else if (item.getType().equals(Material.TRIDENT)) {
+            attackDamage = 9;
+        }
+        else {
+            attackDamage = 1;
+        }
+
+        return attackDamage;
+    }
 }
