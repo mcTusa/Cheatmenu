@@ -111,8 +111,7 @@ public class CalculateDamage {
             attackDamage = 2;
         } else if (item.getType().equals(Material.WOODEN_PICKAXE)) {
             attackDamage = 2;
-        }
-        else if (item.getType().equals(Material.NETHERITE_SHOVEL)) {
+        } else if (item.getType().equals(Material.NETHERITE_SHOVEL)) {
             attackDamage = 6.5;
         } else if (item.getType().equals(Material.DIAMOND_SHOVEL)) {
             attackDamage = 5.5;

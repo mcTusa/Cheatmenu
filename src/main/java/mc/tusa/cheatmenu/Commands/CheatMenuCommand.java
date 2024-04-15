@@ -6,22 +6,17 @@ import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketContainer;
 import mc.tusa.cheatmenu.CalculateDamage;
 import mc.tusa.cheatmenu.Cheatmenu;
-import mc.tusa.cheatmenu.Functions;
 import mc.tusa.cheatmenu.Listeners.CheatGUI;
 import mc.tusa.cheatmenu.TeleportUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
-
 import java.util.List;
-import java.util.Map;
 
 public class CheatMenuCommand implements CommandExecutor {
 
