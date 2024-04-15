@@ -1,0 +1,11 @@
+name: Cheatmenu
+version: '${project.version}'
+main: mc.tusa.cheatmenu.Cheatmenu
+api-version: 1.20
+authors: [ mcTusa ]
+description: Some plugin for cheat menu
+commands:
+  cheatgui:
+    description: Some command
+    permission: cheatmenu.cheatgui
+depend: [PacketWrapper, ProtocolLib]
