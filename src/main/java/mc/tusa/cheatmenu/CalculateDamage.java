@@ -1,5 +1,7 @@
 package mc.tusa.cheatmenu;
 
+import mc.tusa.cheatmenu.Commands.CheatMenuCommand;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
@@ -9,9 +11,13 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.logging.Level;
+
 public class CalculateDamage {
     public static void CalculateItemAttackDamage(Player player, Player victim, ItemStack item) {
         double attackDamage = getDamage(item);
+        if (CheatMenuCommand.canCrit(player))
+            attackDamage *= 1.5;
         int sharpnessLVL;
         try
         {
@@ -39,36 +45,12 @@ public class CalculateDamage {
         damagePlayer(victim, attackDamage, player);
     }
     public static void damagePlayer(Player p, double damage, Player damager) {
-        PotionEffect weakness = p.getPotionEffect(PotionEffectType.WEAKNESS);
-        int weaknessInt = weakness == null ? 0 : weakness.getAmplifier() + 1;
-        PotionEffect strength = p.getPotionEffect(PotionEffectType.INCREASE_DAMAGE);
+        PotionEffect weakness = damager.getPotionEffect(PotionEffectType.WEAKNESS);
+        int weaknessInt = weakness == null ? 0 : weakness.getAmplifier();
+        PotionEffect strength = damager.getPotionEffect(PotionEffectType.INCREASE_DAMAGE);
         int strengthInt = strength == null ? 0 : strength.getAmplifier();
-        double points = p.getAttribute(Attribute.GENERIC_ARMOR).getValue();
-        double toughness = p.getAttribute(Attribute.GENERIC_ARMOR_TOUGHNESS).getValue();
-        PotionEffect effect = p.getPotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
-        int resistance = effect == null ? 0 : effect.getAmplifier();
-        int epf = getEPF(p.getInventory());
 
-        p.damage(calculateDamageApplied((damage - weaknessInt * 3 + strengthInt * 3), points, toughness, resistance, epf), damager);
-    }
-
-    public static double calculateDamageApplied(double damage, double points, double toughness, int resistance, int epf) {
-        double withArmorAndToughness = damage * (1 - Math.min(20, Math.max(points / 5, points - damage / (2 + toughness / 4))) / 25);
-        double withResistance = withArmorAndToughness * (1 - (resistance * 0.2));
-        double withEnchants = withResistance * (1 - (Math.min(20.0, epf) / 25));
-        return withEnchants;
-    }
-
-    public static int getEPF(PlayerInventory inv) {
-        ItemStack helm = inv.getHelmet();
-        ItemStack chest = inv.getChestplate();
-        ItemStack legs = inv.getLeggings();
-        ItemStack boot = inv.getBoots();
-
-        return (helm != null ? helm.getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) : 0) +
-                (chest != null ? chest.getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) : 0) +
-                (legs != null ? legs.getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) : 0) +
-                (boot != null ? boot.getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) : 0);
+        p.damage(damage - weaknessInt * 3 + strengthInt * 3, damager);
     }
 
     public static double getDamage(ItemStack item)
