@@ -17,6 +17,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import java.util.List;
 
@@ -126,6 +127,11 @@ public class CheatMenuCommand implements CommandExecutor {
                 }
             }
         }.runTaskTimer(cheatmenu, 0, 1);
+    }
+
+    public static boolean canCrit(Player player)
+    {
+        return player.getVelocity().getY() < 0 && !player.isOnGround() && !player.getLocation().subtract(0, 0.1, 0).getBlock().getType().equals(Material.LADDER) && !player.getLocation().subtract(0, 0.1, 0).getBlock().getType().equals(Material.VINE) && !player.getLocation().subtract(0, 0.1, 0).getBlock().getType().equals(Material.WATER) && player.getPotionEffect(PotionEffectType.BLINDNESS) == null && player.getPotionEffect(PotionEffectType.SLOW_FALLING) == null && player.getVehicle() == null && !player.isSprinting() && !player.isFlying();
     }
 
     public int getDelay(ItemStack itemStack)
